@@ -144,8 +144,6 @@ class IDToken(JWTClaims):
                 required = True
 
         azp = self.get("azp")
-        if required and not azp:
-            raise MissingClaimError("azp")
 
         if azp and client_id and azp != client_id:
             raise InvalidClaimError("azp")
