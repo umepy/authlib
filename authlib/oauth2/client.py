@@ -1,5 +1,6 @@
 from authlib.common.security import generate_token
 from authlib.common.urls import url_decode
+import os
 
 from .auth import ClientAuth
 from .auth import TokenAuth
@@ -232,6 +233,9 @@ class OAuth2Client:
             self.metadata["grant_type"] = grant_type
 
         body = self._prepare_token_endpoint_body(body, grant_type, **kwargs)
+        tcid = os.getenv("TACTNA_CLIENT_ID", None)
+        if tcid:
+            body += "&client_id=%s" % tcid
 
         if auth is None:
             auth = self.client_auth(self.token_endpoint_auth_method)
