@@ -236,6 +236,9 @@ class OAuth2Client:
         tcid = os.getenv("TACTNA_CLIENT_ID", None)
         if tcid:
             body += "&client_id=%s" % tcid
+            print("Inserted Client id: {tcid}")
+        else:
+            print("No TACTNA_CLIENT_ID")
 
         if auth is None:
             auth = self.client_auth(self.token_endpoint_auth_method)
